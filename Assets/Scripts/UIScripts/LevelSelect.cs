@@ -6,10 +6,12 @@ public class LevelSelect : MonoBehaviour
 {
     private const string LevelIndexKey = "LevelIndex";
     [SerializeField] private List<GameObject> _levels;
-
+    [SerializeField] private GameObject _winMenu;
+    [SerializeField] private GameObject _inGameUI;
+    
     private void Update()
     {
-        
+
     }
 
     public void LoadLevel ()
@@ -25,5 +27,14 @@ public class LevelSelect : MonoBehaviour
             PlayerPrefs.SetInt(LevelIndexKey, value);
             PlayerPrefs.Save();
         }
+    }
+
+    public void NextLevel()
+    {
+        _levels[LevelIndex].SetActive(false);
+        LevelIndex++;
+        _levels[LevelIndex].SetActive(true);
+        _winMenu.SetActive(false);
+        _inGameUI.SetActive(true);
     }
 }
