@@ -23,6 +23,7 @@ public class DragObject : MonoBehaviour
         {
             _rigidbody.velocity = _rigidbody.velocity.normalized * _objectMaxSpeed;
         }
+
     }
     private void OnMouseDrag()
     {
