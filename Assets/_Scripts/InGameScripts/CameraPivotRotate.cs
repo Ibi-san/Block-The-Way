@@ -27,15 +27,23 @@ public class CameraPivotRotate : MonoBehaviour
     public void LeftRotate()
     {
         _positionInList++;
-        if (_positionInList >= _cameraPositions.Count) _positionInList = 0;
+        if (_positionInList >= _cameraPositions.Count) 
+            _positionInList = 0;
         _currentPosition = _cameraPositions[_positionInList];
     }
 
     //Поворот камеры направо
     public void RightRotate()
     {
-        if (_positionInList <= 0) _positionInList = _cameraPositions.Count;
+        if (_positionInList <= 0) 
+            _positionInList = _cameraPositions.Count;
         _positionInList--;
         _currentPosition = _cameraPositions[_positionInList];
+    }
+
+    public void DefaultPosition()
+    {
+        _positionInList = 0;
+        _currentPosition = _cameraPositions[0];
     }
 }

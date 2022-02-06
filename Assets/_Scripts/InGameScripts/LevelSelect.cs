@@ -8,7 +8,7 @@ public class LevelSelect : MonoBehaviour
     [SerializeField] private List<GameObject> _levels;
     [SerializeField] private GameObject _winMenu;
     [SerializeField] private GameObject _inGameUI;
-    
+    [SerializeField] private CameraPivotRotate _cameraPivotRotate;
     private void Update()
     {
 
@@ -36,5 +36,6 @@ public class LevelSelect : MonoBehaviour
         _levels[LevelIndex].SetActive(true);
         _winMenu.SetActive(false);
         _inGameUI.SetActive(true);
+        _cameraPivotRotate.DefaultPosition();
     }
 }
