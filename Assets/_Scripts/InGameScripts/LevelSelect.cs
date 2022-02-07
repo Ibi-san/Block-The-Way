@@ -5,14 +5,11 @@ using UnityEngine;
 public class LevelSelect : MonoBehaviour
 {
     private const string LevelIndexKey = "LevelIndex";
-    [SerializeField] private List<GameObject> _levels;
+    public List<GameObject> _levels;
     [SerializeField] private GameObject _winMenu;
     [SerializeField] private GameObject _inGameUI;
     [SerializeField] private CameraPivotRotate _cameraPivotRotate;
-    private void Update()
-    {
-
-    }
+    [SerializeField] private GameObject _goal;
 
     public void LoadLevel ()
     {
@@ -32,10 +29,12 @@ public class LevelSelect : MonoBehaviour
     public void NextLevel()
     {
         _levels[LevelIndex].SetActive(false);
-        LevelIndex++;
+        if (LevelIndex < _levels.Count - 1) LevelIndex++;
+        else return;
         _levels[LevelIndex].SetActive(true);
         _winMenu.SetActive(false);
         _inGameUI.SetActive(true);
         _cameraPivotRotate.DefaultPosition();
+        _goal.GetComponent<Animator>().SetTrigger("Cry");
     }
 }

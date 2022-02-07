@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class StartMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _startMenuCanvas;
-    [SerializeField] private GameObject _level1;
     [SerializeField] private GameObject _inGameUI;
     [SerializeField] private GameObject _goal;
     [SerializeField] private GameObject _enemy;

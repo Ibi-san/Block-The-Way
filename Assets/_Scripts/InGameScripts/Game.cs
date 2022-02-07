@@ -5,16 +5,17 @@ using UnityEngine.AI;
 
 public class Game : MonoBehaviour
 {
-    [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private NavMeshAgent _enemyAgent;
     [SerializeField] private Collider _goalCollider;
     [SerializeField] private GameObject _startMenu;
     [SerializeField] private GameObject _winMenu;
     [SerializeField] private GameObject _inGameUI;
     [SerializeField] private LevelSelect _levelSelect;
+    [SerializeField] private GameObject _goal;
     public bool levelstarted = false;
     public Enemy _enemy;
-
     
+
 
     private void Update()
     {
@@ -29,6 +30,7 @@ public class Game : MonoBehaviour
     {
         levelstarted = true;
         _enemy.GetComponent<Enemy>().StartNavigation();
+        _enemy.GetComponent<Animator>().SetTrigger("Walking");
         DisableControl();
     }
 
@@ -52,13 +54,15 @@ public class Game : MonoBehaviour
     IEnumerator WinCondition()
     {
         yield return new WaitForSeconds(1);
-        if (agent.velocity.magnitude == 0)
+        if (_enemyAgent.velocity.magnitude == 0)
         {
+            _goal.GetComponent<Animator>().StopPlayback();
             _winMenu.SetActive(true);
             _inGameUI.SetActive(false);
             levelstarted = false;
             EnableControl();
             _enemy.RestartAgent();
+            _goal.GetComponent<Animator>().SetTrigger("Victory");
         }
     }
 

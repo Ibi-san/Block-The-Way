@@ -5,11 +5,12 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private Transform _goal;
+    [SerializeField] private GameObject _goal;
     public NavMeshSurface surface;
-    public NavMeshAgent agent;
+    public NavMeshAgent EnemyAgent;
     Vector3 enemyStartPosition;
     [SerializeField] private Game _game;
+    [SerializeField] private Enemy _enemy;
 
     private void Start()
     {
@@ -18,10 +19,10 @@ public class Enemy : MonoBehaviour
 
     public void StartNavigation()
     {
-        agent.enabled = true;
+        EnemyAgent.enabled = true;
         surface.BuildNavMesh();
         GetComponent<Enemy>().enabled = true;
-        agent.destination = _goal.position;
+        EnemyAgent.destination = _goal.transform.position;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,7 +36,9 @@ public class Enemy : MonoBehaviour
     public void RestartAgent()
     {
         GetComponent<Enemy>().enabled = false;
-        agent.Warp(enemyStartPosition);
-        agent.enabled = false;
+        EnemyAgent.Warp(enemyStartPosition);
+        EnemyAgent.enabled = false;
+        _enemy.GetComponent<Animator>().StopPlayback();
+        _enemy.GetComponent<Animator>().SetTrigger("Idle");
     }
 }
