@@ -10,9 +10,14 @@ public class LevelSelect : MonoBehaviour
     [SerializeField] private GameObject _inGameUI;
     [SerializeField] private CameraPivotRotate _cameraPivotRotate;
     [SerializeField] private GameObject _goal;
+    [SerializeField] private ParticleSystem _goalCryingParticle;
+    [SerializeField] private ParticleSystem _victoryCryingParticle;
+    [SerializeField] private ParticleSystem _enemyBrainParticle;
+    [SerializeField] private ParticleSystem _enemyZombieLooseParticle;
 
-    public void LoadLevel ()
+    public void LoadLevel (int levelIndex)
     {
+        LevelIndex = levelIndex;
         _levels[LevelIndex].SetActive(true);
     }
 
@@ -36,5 +41,9 @@ public class LevelSelect : MonoBehaviour
         _inGameUI.SetActive(true);
         _cameraPivotRotate.DefaultPosition();
         _goal.GetComponent<Animator>().SetTrigger("Cry");
+        _victoryCryingParticle.Stop();
+        _goalCryingParticle.Play();
+        _enemyZombieLooseParticle.Stop();
+        _enemyBrainParticle.Play();
     }
 }

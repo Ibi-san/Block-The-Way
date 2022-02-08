@@ -12,6 +12,11 @@ public class Game : MonoBehaviour
     [SerializeField] private GameObject _inGameUI;
     [SerializeField] private LevelSelect _levelSelect;
     [SerializeField] private GameObject _goal;
+    [SerializeField] private ParticleSystem _goalCryingParticle;
+    [SerializeField] private ParticleSystem _victoryCryingParticle;
+    [SerializeField] private ParticleSystem _enemyBrainParticle;
+    [SerializeField] private ParticleSystem _enemyZombieLooseParticle;
+
     public bool levelstarted = false;
     public Enemy _enemy;
     
@@ -56,13 +61,16 @@ public class Game : MonoBehaviour
         yield return new WaitForSeconds(1);
         if (_enemyAgent.velocity.magnitude == 0)
         {
-            _goal.GetComponent<Animator>().StopPlayback();
             _winMenu.SetActive(true);
             _inGameUI.SetActive(false);
             levelstarted = false;
             EnableControl();
             _enemy.RestartAgent();
             _goal.GetComponent<Animator>().SetTrigger("Victory");
+            _goalCryingParticle.Stop();
+            _victoryCryingParticle.Play();
+            _enemyBrainParticle.Stop();
+            _enemyZombieLooseParticle.Play();
         }
     }
 

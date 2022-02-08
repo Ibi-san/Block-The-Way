@@ -9,6 +9,7 @@ public class CameraPivotRotate : MonoBehaviour
     private Transform _currentPosition;
     [SerializeField] private Transform _cameraPivot;
     public int _positionInList;
+    [SerializeField] private float _speed = 2f;
 
     private void Start()
     {
@@ -19,8 +20,8 @@ public class CameraPivotRotate : MonoBehaviour
     //Присвоение позиции камеры к позициям в списке
     private void Update()
     {
-        _cameraPivot.position = _currentPosition.position;
-        _cameraPivot.rotation = _currentPosition.rotation;
+        _cameraPivot.position = Vector3.Lerp(_cameraPivot.position, _currentPosition.position, _speed * Time.deltaTime);
+        _cameraPivot.rotation = Quaternion.Lerp(_cameraPivot.rotation, _currentPosition.rotation, _speed * Time.deltaTime);
     }
 
     //Поворот камеры налево

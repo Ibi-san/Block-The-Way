@@ -8,23 +8,16 @@ public class DragObject : MonoBehaviour
 {
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private float _sensetivity;
-    [SerializeField] private float _objectMaxSpeed = 200f;
+    private float _objectSpeed;
     public CameraPivotRotate cameraPosition;
 
     private void Awake()
     {
+        _objectSpeed += Time.deltaTime * _sensetivity * 10f;
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate()
-    {
-        //Ограничение максимальной скорости передвижения объекта
-        if (_rigidbody.velocity.magnitude > _objectMaxSpeed)
-        {
-            _rigidbody.velocity = _rigidbody.velocity.normalized * _objectMaxSpeed;
-        }
-
-    }
+    
     private void OnMouseDrag()
     {
         //При нажатии на предмет и его передвижении, сохраняем величину и направление движения мыши(пальца) в переменную и передаём эту переменную в двигающую силу
@@ -50,43 +43,43 @@ public class DragObject : MonoBehaviour
     {
         float distanceX = Input.GetAxis("Mouse X") * Time.deltaTime;
         if (distanceX != 0)
-            _rigidbody.AddForce(distanceX * _sensetivity, 0, distanceX * _sensetivity, ForceMode.VelocityChange);
+            _rigidbody.AddForce(distanceX * _objectSpeed, 0, distanceX * _objectSpeed, ForceMode.VelocityChange);
 
         float distanceZ = Input.GetAxis("Mouse Y") * Time.deltaTime;
         if (distanceZ != 0)
-            _rigidbody.AddForce(-distanceZ * _sensetivity, 0, distanceZ * _sensetivity, ForceMode.VelocityChange);
+            _rigidbody.AddForce(-distanceZ * _objectSpeed, 0, distanceZ * _objectSpeed, ForceMode.VelocityChange);
     }
 
     private void Position2()
     {
         float distanceX = Input.GetAxis("Mouse X") * Time.deltaTime;
         if (distanceX != 0)
-            _rigidbody.AddForce(distanceX * _sensetivity, 0, -distanceX * _sensetivity, ForceMode.VelocityChange);
+            _rigidbody.AddForce(distanceX * _objectSpeed, 0, -distanceX * _objectSpeed, ForceMode.VelocityChange);
 
         float distanceZ = Input.GetAxis("Mouse Y") * Time.deltaTime;
         if (distanceZ != 0)
-            _rigidbody.AddForce(distanceZ * _sensetivity, 0, distanceZ * _sensetivity, ForceMode.VelocityChange);
+            _rigidbody.AddForce(distanceZ * _objectSpeed, 0, distanceZ * _objectSpeed, ForceMode.VelocityChange);
     }
 
     private void Position3()
     {
         float distanceX = Input.GetAxis("Mouse X") * Time.deltaTime;
         if (distanceX != 0)
-            _rigidbody.AddForce(-distanceX * _sensetivity, 0, -distanceX * _sensetivity, ForceMode.VelocityChange);
+            _rigidbody.AddForce(-distanceX * _objectSpeed, 0, -distanceX * _objectSpeed, ForceMode.VelocityChange);
 
         float distanceZ = Input.GetAxis("Mouse Y") * Time.deltaTime;
         if (distanceZ != 0)
-            _rigidbody.AddForce(distanceZ * _sensetivity, 0, -distanceZ * _sensetivity, ForceMode.VelocityChange);
+            _rigidbody.AddForce(distanceZ * _objectSpeed, 0, -distanceZ * _objectSpeed, ForceMode.VelocityChange);
     }
 
     private void Position4()
     {
         float distanceX = Input.GetAxis("Mouse X") * Time.deltaTime;
         if (distanceX != 0)
-            _rigidbody.AddForce(-distanceX * _sensetivity, 0, distanceX * _sensetivity, ForceMode.VelocityChange);
+            _rigidbody.AddForce(-distanceX * _objectSpeed, 0, distanceX * _objectSpeed, ForceMode.VelocityChange);
 
         float distanceZ = Input.GetAxis("Mouse Y") * Time.deltaTime;
         if (distanceZ != 0)
-            _rigidbody.AddForce(-distanceZ * _sensetivity, 0, -distanceZ * _sensetivity, ForceMode.VelocityChange);
+            _rigidbody.AddForce(-distanceZ * _objectSpeed, 0, -distanceZ * _objectSpeed, ForceMode.VelocityChange);
     }
 }

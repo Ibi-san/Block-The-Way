@@ -12,7 +12,6 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private Text _newGameButtonText;
     [SerializeField] private LevelSelect _levelSelect;
 
-
     public const string GameStarted = "gameStarted";
 
     private void Awake()
@@ -32,7 +31,7 @@ public class StartMenu : MonoBehaviour
     public void NewGameButton()
     {
         _startMenuCanvas.SetActive(false);
-        _levelSelect.LoadLevel();
+        _levelSelect.LoadLevel(_levelSelect.LevelIndex);
         _inGameUI.SetActive(true);
         _goal.SetActive(true);
         _enemy.SetActive(true);

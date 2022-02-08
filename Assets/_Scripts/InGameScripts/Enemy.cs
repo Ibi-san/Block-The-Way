@@ -27,7 +27,6 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-            Debug.Log("Loose!");
             _game.levelstarted = false;
             RestartAgent();
             _game.GetComponent<Game>().EnableControl();
@@ -38,7 +37,6 @@ public class Enemy : MonoBehaviour
         GetComponent<Enemy>().enabled = false;
         EnemyAgent.Warp(enemyStartPosition);
         EnemyAgent.enabled = false;
-        _enemy.GetComponent<Animator>().StopPlayback();
         _enemy.GetComponent<Animator>().SetTrigger("Idle");
     }
 }
